@@ -2,6 +2,12 @@
 
 This repo contains an example of using the aws ecs cli v2 tool to create a Python Flask application
 and all of the infrastructure required to run it in a Fargate cluster.
+It is intended to demonstrate how easy it is to use the cli to package and run your applications
+in a Fargate cluster.
+
+All that you need to create is your source code and associated package requirements, app.py and requirements.txt
+in this example, and a Dockerfile which is used by the cli to build the container.
+The environment variables im the Makefile control the app name, application port and container image version tag.
 
 When this successfully completes a URL will be output which can be used to access the ReST interface
 for the application.
@@ -12,10 +18,13 @@ A variety of resources will be created which are not free.
 
 They include the following
 
-* ALB - approximately $14 per month
+* ALB - approximately $16 per month
 * Fargate task that continuously runs - approximately $10 per month
+* VPC - tbd
+* Internet Gateway - tbd
+* Discovery service - tbd
 
-To ensure that you are not billed after you have finished with this example do a *make delete* and ensure
+To make sure that you are not billed after you have finished with this example do a *make delete* and ensure
 that it completes successfully.
 
 ### What is needed to run this
@@ -26,7 +35,9 @@ that it completes successfully.
 
 ### Usage
 
-The normal usage of this would be as follows
+The normal usage of this would be as follows.
+Note that the cli uses animation so you may see colors and text scrolling while these actions are running.
+
 * *make init* - create project metadata
 * *make app* - create application metadata
 * *make fix-manifest* - modify the manifest to match the app
@@ -34,7 +45,7 @@ The normal usage of this would be as follows
 * *make deploy* - build, push and deploy the application to the cluster
 * *make check* - get the application url and access it
 
-If everything was successful you should see something like the following
+If everything was successful you should see something like the following when you check the endpoint
 
 ```
 $ make check
@@ -42,6 +53,9 @@ url is: http://flask-Publi-xxx-xxx.us-east-1.elb.amazonaws.com/api
 Hello World!
 
 ```
+You can also do a *make all* which will perform each of the above steps
+
+When you are finished with this, do the following to delete everything that was created
 
 * *make delete* - delete the resources that were created
 
