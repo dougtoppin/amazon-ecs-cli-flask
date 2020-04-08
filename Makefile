@@ -44,10 +44,10 @@ app:
 		--name ${APPNAME} \
 		--port ${PORT}
 
-# backup the generated manifest and then replace it with one for this app
+# modify the generated manifest path and healthcheck endpoints to match the app route endpoints
 fix-manifest:
-	cp ecs-project/flask/manifest.yml ecs-project/flask/manifest.yml.orig
-	cp manifest-mod.yml ecs-project/flask/manifest.yml
+	sed -i bak 's/^  path:.*/  path: api/' ecs-project/flask//manifest.yml
+	sed -i bak 's/^  \# healthcheck:.*/  healthcheck: \/healthcheck/' ecs-project/flask//manifest.yml
 
 # create ALB, IGW, subnets, routing tables, note that this will take at least a few minutes
 env:
