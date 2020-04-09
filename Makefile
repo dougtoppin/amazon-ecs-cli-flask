@@ -23,6 +23,7 @@ run:
 # make env
 # make deploy
 # make check
+# make update
 # make delete
 
 # Alternatively, everything can be created with a single command as follows
@@ -67,7 +68,7 @@ check:
 	@echo "url is: ${URL}"
 	@curl ${URL}
 
-# update the stack/app
+# update the stack/app, note that source code changes must be in git
 update:
 	ecs-preview app deploy
 

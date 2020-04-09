@@ -50,10 +50,16 @@ If everything was successful you should see something like the following when yo
 ```
 $ make check
 url is: http://flask-Publi-xxx-xxx.us-east-1.elb.amazonaws.com/api
-Hello World!
-
+{"field1": 5, "field2": "something"}
 ```
+
 You can also do a *make all* which will perform each of the above steps
+
+If you want to make changes to the app.py source and then update the running application,
+make your changes, commit them to git and then do the following.
+This will do everything necessary to build the new image, push it to ecr and then deploy the new image.
+
+* *make update* - update your running application to a new version (changes must be in git)
 
 When you are finished with this, do the following to delete everything that was created
 
